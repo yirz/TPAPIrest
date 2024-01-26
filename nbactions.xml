@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>run</actionName>
+            <packagings>
+                <packaging>jar</packaging>
+            </packagings>
+            <goals>
+                <goal>process-classes</goal>
+                <goal>org.codehaus.mojo:exec-maven-plugin:1.5.0:exec</goal>
+            </goals>
+            <properties>
+                <exec.args>-classpath %classpath comptoirs.App</exec.args>
+                <exec.executable>java</exec.executable>
+            </properties>
+        </action>
+        <action>
+            <actionName>CUSTOM-run</actionName>
+            <displayName>run</displayName>
+            <goals>
+                <goal>spring-boot:run</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-start</actionName>
+            <displayName>start</displayName>
+            <goals>
+                <goal>spring-boot:start</goal>
+            </goals>
+        </action>
+        <action>
+            <actionName>CUSTOM-stop</actionName>
+            <displayName>stop</displayName>
+            <goals>
+                <goal>spring-boot:stop</goal>
+            </goals>
+        </action>
+    </actions>

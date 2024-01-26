@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entity-mappings v="5.4.2" rws="_159319098965351" Pws="_159319098965351" cws="_159319098965351" persistenceUnitName="DEFAULT_PU" sm="false" xs="false" id="_15931909764871" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <entity compositePrimaryKeyClass="LignePK" abs="false" class="Ligne" v="true" xre="true" m="false" rootElement="_15931909764871" id="_15931909797502">
+        <attributes>
+            <basic optional="false" attribute-type="short" v="true" am="PRIVATE" name="quantite" jbt="false" id="_15931909812074">
+                <bv>
+                    <nn/>
+                </bv>
+                <column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </basic>
+            <many-to-one optional="false" primaryKey="false" connected-entity-id="_15931909813747" connected-attribute-id="_159319098294819" v="true" am="PRIVATE" name="commande" jbt="false" id="_15931909812485">
+                <cascade/>
+                <join-column name="COMMANDE" rc="NUMERO" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </many-to-one>
+            <many-to-one optional="false" primaryKey="false" connected-entity-id="_159319098299121" connected-attribute-id="_159319098377931" v="true" am="PRIVATE" name="produit" jbt="false" id="_15931909812886">
+                <cascade/>
+                <join-column name="PRODUIT" rc="REFERENCE" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </many-to-one>
+            <id attribute-type="Integer" v="true" am="PRIVATE" name="id" jbt="false" id="_15931909798393">
+                <column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <generated-value strategy="IDENTITY"/>
+            </id>
+        </attributes>
+        <nq e="true" name="Ligne.findAll">
+            <query>SELECT l FROM Ligne l</query>
+        </nq>
+        <nq e="true" name="Ligne.findById">
+            <query>SELECT l FROM Ligne l WHERE l.id = :id</query>
+        </nq>
+        <nq e="true" name="Ligne.findByQuantite">
+            <query>SELECT l FROM Ligne l WHERE l.quantite = :quantite</query>
+        </nq>
+        <table>
+            <unique-constraint>
+                <column-name>COMMANDE</column-name>
+                <column-name>PRODUIT</column-name>
+            </unique-constraint>
+        </table>
+    </entity>
+    <entity compositePrimaryKeyClass="CommandePK" abs="false" class="Commande" v="true" xre="true" m="false" rootElement="_15931909764871" id="_15931909813747">
+        <attributes>
+            <basic optional="false" attribute-type="java.util.Date" v="true" am="PRIVATE" name="saisiele" jbt="false" id="_15931909815789">
+                <bv>
+                    <nn/>
+                </bv>
+                <temporal>DATE</temporal>
+                <column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </basic>
+            <basic attribute-type="java.util.Date" v="true" am="PRIVATE" name="envoyeele" jbt="false" id="_159319098158110">
+                <temporal>DATE</temporal>
+            </basic>
+            <basic attribute-type="java.math.BigDecimal" v="true" am="PRIVATE" name="port" jbt="false" id="_159319098158211">
+                <column unique="false" nullable="true" insertable="true" updatable="true" precision="18" scale="2"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="destinataire" jbt="false" id="_159319098158512">
+                <bv>
+                    <si ma="40"/>
+                </bv>
+                <column unique="false" nullable="true" insertable="true" updatable="true" length="40"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="adresseLivraison" jbt="false" id="_159319098177113">
+                <bv>
+                    <si ma="60"/>
+                </bv>
+                <column name="ADRESSE_LIVRAISON" unique="false" nullable="true" insertable="true" updatable="true" length="60"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="villeLivraison" jbt="false" id="_159319098197114">
+                <bv>
+                    <si ma="15"/>
+                </bv>
+                <column name="VILLE_LIVRAISON" unique="false" nullable="true" insertable="true" updatable="true" length="15"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="regionLivraison" jbt="false" id="_159319098221215">
+                <bv>
+                    <si ma="15"/>
+                </bv>
+                <column name="REGION_LIVRAISON" unique="false" nullable="true" insertable="true" updatable="true" length="15"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="codePostalLivraison" jbt="false" id="_159319098238116">
+                <bv>
+                    <si ma="10"/>
+                </bv>
+                <column name="CODE_POSTAL_LIVRAISON" unique="false" nullable="true" insertable="true" updatable="true" length="10"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="paysLivraison" jbt="false" id="_159319098261117">
+                <bv>
+                    <si ma="15"/>
+                </bv>
+                <column name="PAYS_LIVRAISON" unique="false" nullable="true" insertable="true" updatable="true" length="15"/>
+            </basic>
+            <basic optional="false" attribute-type="java.math.BigDecimal" v="true" am="PRIVATE" name="remise" jbt="false" id="_159319098294018">
+                <bv>
+                    <nn/>
+                </bv>
+                <column unique="false" nullable="false" insertable="true" updatable="true" precision="10" scale="2"/>
+            </basic>
+            <many-to-one optional="false" primaryKey="false" connected-entity-id="_159319098452238" connected-attribute-id="_159319098753750" v="true" am="PRIVATE" name="client" jbt="false" id="_159319098298820">
+                <cascade/>
+                <join-column name="CLIENT" rc="CODE" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </many-to-one>
+            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_15931909797502" connected-attribute-id="_15931909812485" v="true" am="PRIVATE" name="ligneList" jbt="false" id="_159319098294819">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+            <id attribute-type="Integer" v="true" am="PRIVATE" name="numero" jbt="false" id="_15931909813758">
+                <column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <generated-value strategy="IDENTITY"/>
+            </id>
+        </attributes>
+        <nq e="true" name="Commande.findAll">
+            <query>SELECT c FROM Commande c</query>
+        </nq>
+        <nq e="true" name="Commande.findByNumero">
+            <query>SELECT c FROM Commande c WHERE c.numero = :numero</query>
+        </nq>
+        <nq e="true" name="Commande.findBySaisiele">
+            <query>SELECT c FROM Commande c WHERE c.saisiele = :saisiele</query>
+        </nq>
+        <nq e="true" name="Commande.findByEnvoyeele">
+            <query>SELECT c FROM Commande c WHERE c.envoyeele = :envoyeele</query>
+        </nq>
+        <nq e="true" name="Commande.findByPort">
+            <query>SELECT c FROM Commande c WHERE c.port = :port</query>
+        </nq>
+        <nq e="true" name="Commande.findByDestinataire">
+            <query>SELECT c FROM Commande c WHERE c.destinataire = :destinataire</query>
+        </nq>
+        <nq e="true" name="Commande.findByAdresseLivraison">
+            <query>SELECT c FROM Commande c WHERE c.adresseLivraison = :adresseLivraison</query>
+        </nq>
+        <nq e="true" name="Commande.findByVilleLivraison">
+            <query>SELECT c FROM Commande c WHERE c.villeLivraison = :villeLivraison</query>
+        </nq>
+        <nq e="true" name="Commande.findByRegionLivraison">
+            <query>SELECT c FROM Commande c WHERE c.regionLivraison = :regionLivraison</query>
+        </nq>
+        <nq e="true" name="Commande.findByCodePostalLivraison">
+            <query>SELECT c FROM Commande c WHERE c.codePostalLivraison = :codePostalLivraison</query>
+        </nq>
+        <nq e="true" name="Commande.findByPaysLivraison">
+            <query>SELECT c FROM Commande c WHERE c.paysLivraison = :paysLivraison</query>
+        </nq>
+        <nq e="true" name="Commande.findByRemise">
+            <query>SELECT c FROM Commande c WHERE c.remise = :remise</query>
+        </nq>
+    </entity>
+    <entity compositePrimaryKeyClass="ProduitPK" abs="false" class="Produit" v="true" xre="true" m="false" rootElement="_15931909764871" id="_159319098299121">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" am="PRIVATE" name="nom" jbt="false" id="_159319098317923">
+                <bv>
+                    <nn/>
+                    <si mi="1" ma="40"/>
+                </bv>
+                <column unique="false" nullable="false" insertable="true" updatable="true" length="40"/>
+            </basic>
+            <basic optional="false" attribute-type="int" v="true" am="PRIVATE" name="fournisseur" jbt="false" id="_159319098344624">
+                <bv>
+                    <nn/>
+                </bv>
+                <column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="quantiteParUnite" jbt="false" id="_159319098344825">
+                <bv>
+                    <si ma="30"/>
+                </bv>
+                <column name="QUANTITE_PAR_UNITE" unique="false" nullable="true" insertable="true" updatable="true" length="30"/>
+            </basic>
+            <basic optional="false" attribute-type="java.math.BigDecimal" v="true" am="PRIVATE" name="prixUnitaire" jbt="false" id="_159319098376926">
+                <bv>
+                    <nn/>
+                </bv>
+                <column name="PRIX_UNITAIRE" unique="false" nullable="false" insertable="true" updatable="true" precision="18" scale="2"/>
+            </basic>
+            <basic optional="false" attribute-type="short" v="true" am="PRIVATE" name="unitesEnStock" jbt="false" id="_159319098377427">
+                <bv>
+                    <nn/>
+                </bv>
+                <column name="UNITES_EN_STOCK" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </basic>
+            <basic optional="false" attribute-type="short" v="true" am="PRIVATE" name="unitesCommandees" jbt="false" id="_159319098377628">
+                <bv>
+                    <nn/>
+                </bv>
+                <column name="UNITES_COMMANDEES" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </basic>
+            <basic optional="false" attribute-type="short" v="true" am="PRIVATE" name="niveauDeReappro" jbt="false" id="_159319098377929">
+                <bv>
+                    <nn/>
+                </bv>
+                <column name="NIVEAU_DE_REAPPRO" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </basic>
+            <basic optional="false" attribute-type="short" v="true" am="PRIVATE" name="indisponible" jbt="false" id="_159319098377930">
+                <bv>
+                    <nn/>
+                </bv>
+                <column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </basic>
+            <many-to-one optional="false" primaryKey="false" connected-entity-id="_159319098378333" connected-attribute-id="_159319098451137" v="true" am="PRIVATE" name="categorie" jbt="false" id="_159319098378232">
+                <cascade/>
+                <join-column name="CATEGORIE" rc="CODE" unique="false" nullable="false" insertable="true" updatable="true"/>
+            </many-to-one>
+            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_15931909797502" connected-attribute-id="_15931909812886" v="true" am="PRIVATE" name="ligneList" jbt="false" id="_159319098377931">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+            <id attribute-type="Integer" v="true" am="PRIVATE" name="reference" jbt="false" id="_159319098299222">
+                <column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <generated-value strategy="IDENTITY"/>
+            </id>
+        </attributes>
+        <nq e="true" name="Produit.findAll">
+            <query>SELECT p FROM Produit p</query>
+        </nq>
+        <nq e="true" name="Produit.findByReference">
+            <query>SELECT p FROM Produit p WHERE p.reference = :reference</query>
+        </nq>
+        <nq e="true" name="Produit.findByNom">
+            <query>SELECT p FROM Produit p WHERE p.nom = :nom</query>
+        </nq>
+        <nq e="true" name="Produit.findByFournisseur">
+            <query>SELECT p FROM Produit p WHERE p.fournisseur = :fournisseur</query>
+        </nq>
+        <nq e="true" name="Produit.findByQuantiteParUnite">
+            <query>SELECT p FROM Produit p WHERE p.quantiteParUnite = :quantiteParUnite</query>
+        </nq>
+        <nq e="true" name="Produit.findByPrixUnitaire">
+            <query>SELECT p FROM Produit p WHERE p.prixUnitaire = :prixUnitaire</query>
+        </nq>
+        <nq e="true" name="Produit.findByUnitesEnStock">
+            <query>SELECT p FROM Produit p WHERE p.unitesEnStock = :unitesEnStock</query>
+        </nq>
+        <nq e="true" name="Produit.findByUnitesCommandees">
+            <query>SELECT p FROM Produit p WHERE p.unitesCommandees = :unitesCommandees</query>
+        </nq>
+        <nq e="true" name="Produit.findByNiveauDeReappro">
+            <query>SELECT p FROM Produit p WHERE p.niveauDeReappro = :niveauDeReappro</query>
+        </nq>
+        <nq e="true" name="Produit.findByIndisponible">
+            <query>SELECT p FROM Produit p WHERE p.indisponible = :indisponible</query>
+        </nq>
+        <table>
+            <unique-constraint>
+                <column-name>NOM</column-name>
+            </unique-constraint>
+        </table>
+    </entity>
+    <entity compositePrimaryKeyClass="CategoriePK" abs="false" class="Categorie" v="true" xre="true" m="false" rootElement="_15931909764871" id="_159319098378333">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" am="PRIVATE" name="libelle" dv="&quot;Libellé de la catégorie&quot;" jbt="false" id="_159319098400835">
+                <bv>
+                    <nn/>
+                    <si mi="1" ma="25"/>
+                </bv>
+                <column unique="false" nullable="false" insertable="true" updatable="true" length="25"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="description" jbt="false" id="_159319098426536">
+                <bv>
+                    <si ma="255"/>
+                </bv>
+            </basic>
+            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_159319098299121" connected-attribute-id="_159319098378232" v="true" am="PRIVATE" name="produitList" jbt="false" id="_159319098451137">
+                <cascade>
+                    <cascade-persist/>
+                    <cascade-refresh/>
+                </cascade>
+            </one-to-many>
+            <id attribute-type="Integer" v="true" am="PRIVATE" name="code" jbt="false" id="_159319098378434">
+                <column unique="false" nullable="false" insertable="true" updatable="true"/>
+                <generated-value strategy="IDENTITY"/>
+            </id>
+        </attributes>
+        <nq e="true" name="Categorie.findAll">
+            <query>SELECT c FROM Categorie c</query>
+        </nq>
+        <nq e="true" name="Categorie.findByCode">
+            <query>SELECT c FROM Categorie c WHERE c.code = :code</query>
+        </nq>
+        <nq e="true" name="Categorie.findByLibelle">
+            <query>SELECT c FROM Categorie c WHERE c.libelle = :libelle</query>
+        </nq>
+        <nq e="true" name="Categorie.findByDescription">
+            <query>SELECT c FROM Categorie c WHERE c.description = :description</query>
+        </nq>
+        <table>
+            <unique-constraint>
+                <column-name>LIBELLE</column-name>
+            </unique-constraint>
+        </table>
+    </entity>
+    <entity compositePrimaryKeyClass="ClientPK" abs="false" class="Client" v="true" xre="true" m="false" rootElement="_15931909764871" id="_159319098452238">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" am="PRIVATE" name="societe" jbt="false" id="_159319098485240">
+                <bv>
+                    <nn/>
+                    <si mi="1" ma="40"/>
+                </bv>
+                <column unique="false" nullable="false" insertable="true" updatable="true" length="40"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="contact" jbt="false" id="_159319098521241">
+                <bv>
+                    <si ma="30"/>
+                </bv>
+                <column unique="false" nullable="true" insertable="true" updatable="true" length="30"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="fonction" jbt="false" id="_159319098544242">
+                <bv>
+                    <si ma="30"/>
+                </bv>
+                <column unique="false" nullable="true" insertable="true" updatable="true" length="30"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="adresse" jbt="false" id="_159319098571843">
+                <bv>
+                    <si ma="60"/>
+                </bv>
+                <column unique="false" nullable="true" insertable="true" updatable="true" length="60"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="ville" jbt="false" id="_159319098593544">
+                <bv>
+                    <si ma="15"/>
+                </bv>
+                <column unique="false" nullable="true" insertable="true" updatable="true" length="15"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="region" jbt="false" id="_159319098621145">
+                <bv>
+                    <si ma="15"/>
+                </bv>
+                <column unique="false" nullable="true" insertable="true" updatable="true" length="15"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="codePostal" jbt="false" id="_159319098645346">
+                <bv>
+                    <si ma="10"/>
+                </bv>
+                <column name="CODE_POSTAL" unique="false" nullable="true" insertable="true" updatable="true" length="10"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="pays" jbt="false" id="_159319098666047">
+                <bv>
+                    <si ma="15"/>
+                </bv>
+                <column unique="false" nullable="true" insertable="true" updatable="true" length="15"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="telephone" jbt="false" id="_159319098682648">
+                <bv>
+                    <si ma="24"/>
+                </bv>
+                <column unique="false" nullable="true" insertable="true" updatable="true" length="24"/>
+            </basic>
+            <basic attribute-type="String" v="true" am="PRIVATE" name="fax" jbt="false" id="_159319098729849">
+                <bv>
+                    <si ma="24"/>
+                </bv>
+                <column unique="false" nullable="true" insertable="true" updatable="true" length="24"/>
+            </basic>
+            <one-to-many own="false" collection-type="java.util.List" connected-entity-id="_15931909813747" connected-attribute-id="_159319098298820" v="true" am="PRIVATE" name="commandeList" jbt="false" id="_159319098753750">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+            <id attribute-type="String" v="true" am="PRIVATE" name="code" jbt="false" id="_159319098452239">
+                <bv>
+                    <nn/>
+                    <si mi="1" ma="5"/>
+                </bv>
+                <column unique="false" nullable="false" insertable="true" updatable="true" length="5"/>
+            </id>
+        </attributes>
+        <nq e="true" name="Client.findAll">
+            <query>SELECT c FROM Client c</query>
+        </nq>
+        <nq e="true" name="Client.findByCode">
+            <query>SELECT c FROM Client c WHERE c.code = :code</query>
+        </nq>
+        <nq e="true" name="Client.findBySociete">
+            <query>SELECT c FROM Client c WHERE c.societe = :societe</query>
+        </nq>
+        <nq e="true" name="Client.findByContact">
+            <query>SELECT c FROM Client c WHERE c.contact = :contact</query>
+        </nq>
+        <nq e="true" name="Client.findByFonction">
+            <query>SELECT c FROM Client c WHERE c.fonction = :fonction</query>
+        </nq>
+        <nq e="true" name="Client.findByAdresse">
+            <query>SELECT c FROM Client c WHERE c.adresse = :adresse</query>
+        </nq>
+        <nq e="true" name="Client.findByVille">
+            <query>SELECT c FROM Client c WHERE c.ville = :ville</query>
+        </nq>
+        <nq e="true" name="Client.findByRegion">
+            <query>SELECT c FROM Client c WHERE c.region = :region</query>
+        </nq>
+        <nq e="true" name="Client.findByCodePostal">
+            <query>SELECT c FROM Client c WHERE c.codePostal = :codePostal</query>
+        </nq>
+        <nq e="true" name="Client.findByPays">
+            <query>SELECT c FROM Client c WHERE c.pays = :pays</query>
+        </nq>
+        <nq e="true" name="Client.findByTelephone">
+            <query>SELECT c FROM Client c WHERE c.telephone = :telephone</query>
+        </nq>
+        <nq e="true" name="Client.findByFax">
+            <query>SELECT c FROM Client c WHERE c.fax = :fax</query>
+        </nq>
+        <table>
+            <unique-constraint>
+                <column-name>SOCIETE</column-name>
+            </unique-constraint>
+        </table>
+    </entity>
+    <wsl>
+        <ws n="Main" id="_159319098965351">
+            <i ref="_159319098378333" x="238" y="-71"/>
+            <i ref="_159319098299121" x="24" y="-71"/>
+            <i ref="_159319098452238" x="655" y="-71"/>
+            <i ref="_15931909797502" x="248" y="89"/>
+            <i ref="_15931909813747" x="438" y="-71"/>
+        </ws>
+    </wsl>
+</entity-mappings>
